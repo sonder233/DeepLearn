@@ -175,6 +175,21 @@ def threeNeural():
     print(y)
 
 
+# def softmax(a): 这个实现方式可能会出现溢出，更新如下
+#     exp_a = np.exp(a)
+#     sum_exp_a = np.sum(exp_a)
+#     y = exp_a / sum_exp_a
+#     return y
+
+
+def softmax(a):  # 根据softmax的实现公式，同时加减去一个数，结果不变，因此为了防止指数运算溢出，减去最大的那个数
+    c = np.max(a)
+    exp_a = np.exp(a - c)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    return y
+
+
 if __name__ == '__main__':
     # print(AND(0, 1))
     # print(AND_b(0, 1))
@@ -187,6 +202,8 @@ if __name__ == '__main__':
     # draw_relu()
     # print(arrayMult())
     # layersMult()
-    threeNeural()
+    # threeNeural()
+    a = np.array([0.3, 2.9, 4.0])
+    print(softmax(a))
+    print(sum(softmax(a)))
     pass
-
